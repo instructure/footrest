@@ -17,6 +17,7 @@ module Footrest
         faraday.use                         FaradayMiddleware::FollowRedirects
         faraday.use                         FaradayMiddleware::ParseJson, :content_type => /\bjson$/
         faraday.use                         Faraday::Response::RaiseFootrestHttpError
+        faraday.headers[:accept] =          "application/json"
         faraday.headers[:authorization] =   "Bearer #{auth_token}"
       end
     end
