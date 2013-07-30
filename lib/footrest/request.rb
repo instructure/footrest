@@ -32,7 +32,7 @@ module Footrest
 
     # Generic request
     def request(method, options, &block)
-      connection(options).send(method, &block).body
+      connection.send(method, &block).body
     end
 
   end

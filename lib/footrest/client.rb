@@ -3,17 +3,13 @@ require 'footrest/request'
 
 module Footrest
   class Client
-    attr_accessor(*Configuration::VALID_OPTIONS_KEYS)
-
-    def initialize(options={})
-      options = Footrest.options.merge(options)
-      Configuration::VALID_OPTIONS_KEYS.each do |key|
-        send("#{key}=", options[key])
-      end
-    end
+    attr_reader :options
 
     include Footrest::Connection
     include Footrest::Request
 
+    def initialize(options={})
+      @options = Footrest.config.merge(options)
+    end
   end
 end

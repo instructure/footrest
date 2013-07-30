@@ -1,18 +1,13 @@
 require 'faraday'
+require 'active_support/configurable'
 
 module Footrest
-  module Configuration
-    VALID_OPTIONS_KEYS = [
-      :token,
-      :domain,
-      :path_prefix
-    ].freeze
+  include ActiveSupport::Configurable
+  config_accessor :token
+  config_accessor :domain
+  config_accessor :path_prefix
 
-    attr_accessor(*VALID_OPTIONS_KEYS)
-
-    def options
-      VALID_OPTIONS_KEYS.inject({}) { |o, k| o.merge!(k => send(k)) }
-    end
-
+  def configure
+    yield self
   end
 end
