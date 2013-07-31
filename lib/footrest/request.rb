@@ -19,13 +19,13 @@ module Footrest
 
     def request_with_params_in_url(method, path, options)
       request(method, options) do |r|
-        r.url(File.join(path_prefix, path), options)
+        r.url(File.join(@options.path_prefix, path), options)
       end
     end
 
     def request_with_params_in_body(method, path, options)
       request(method, options) do |r|
-        r.path = File.join(path_prefix, path)
+        r.path = File.join(@options.path_prefix, path)
         r.body = options unless options.empty?
       end
     end
