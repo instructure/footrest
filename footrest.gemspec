@@ -4,10 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'footrest/version'
 
 Gem::Specification.new do |gem|
-  gem.authors =       ["Nathan Mills"]
-  gem.email =         ["nathanm@instructure.com"]
+  gem.authors =       ["Duane Johnson", "Nathan Mills"]
+  gem.email =         ["duane@instructure.com", "nathanm@instructure.com"]
   gem.description =   %q{Ruby interface for restful APIs}
   gem.summary =       %q{REST APIs}
+  gem.homepage =      'https://github.com/instructure/footrest'
+  gem.license =       'MIT'
 
   gem.files = %w[Rakefile footrest.gemspec]
   gem.files += Dir.glob("lib/**/*.rb")
