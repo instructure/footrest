@@ -17,19 +17,19 @@ def fixture(file)
 end
 
 def stub_get(client, url)
-  stub_request(:get, "#{client.domain}#{url}")
+  stub_request(:get, File.join(client.domain, url))
 end
 
 def stub_post(client, url)
-  stub_request(:post, "#{client.domain}#{url}")
+  stub_request(:post, File.join(client.domain, url))
 end
 
 def stub_put(client, url)
-  stub_request(:put, "#{client.domain}#{url}")
+  stub_request(:put, File.join(client.domain, url))
 end
 
 def stub_delete(client, url)
-  stub_request(:delete, "#{client.domain}#{url}")
+  stub_request(:delete, File.join(client.domain, url))
 end
 
 def json_response(file)

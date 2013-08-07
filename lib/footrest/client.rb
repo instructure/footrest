@@ -3,14 +3,14 @@ require 'footrest/request'
 
 module Footrest
   class Client
-    attr_reader :options
-
     include Footrest::Connection
     include Footrest::Request
 
+    attr_reader :config
+
     def initialize(options={}, &block)
-      @options = Footrest.config.merge(options)
-      @faraday_option_block = block
+      @config = Footrest.config.merge(options)
+      set_connection(@config, &block)
     end
   end
 end

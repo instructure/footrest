@@ -1,38 +1,25 @@
 require 'helper'
-require 'ostruct'
 
-class RequestHarness
-  include Footrest::Connection
-  include Footrest::Request
-end
+class RequestHarness; include Footrest::Request; end
 
 describe Footrest::Request do
-
   let(:request) { RequestHarness.new }
+  context "join" do
+    it "retains initial slash" do
+      expect(request.join('/test', 'path')).to eq('/test/path')
+    end
 
-  it "gets" do
-    stub_request(:get, "http://domain.test/page?p=1").
-      to_return(:status => 200, :body => "", :headers => {})
-    request.get('http://domain.test/page', :p => 1)
-  end
+    it "combines multiple segments" do
+      expect(request.join('test', 'path', 'parts')).to eq('test/path/parts')
+    end
 
-  it "deletes" do
-    stub_request(:get, "http://domain.test/page?auth=xyz").
-      to_return(:status => 200, :body => "", :headers => {})
-    request.get('http://domain.test/page', :auth => 'xyz')
-  end
+    it "respects http://" do
+      expect(request.join('http://', 'path')).to eq('http://path')
+    end
 
-  it "posts" do
-    stub_request(:post, "http://domain.test/new_page").
-      with(:body => {"password"=>"xyz", "username"=>"abc"}).
-      to_return(:status => 200, :body => "", :headers => {})
-    request.post('http://domain.test/new_page', :username => 'abc', :password => 'xyz')
-  end
-
-  it "puts" do
-    stub_request(:put, "http://domain.test/update_page").
-      with(:body => {"password"=>"zzz", "username"=>"aaa"}).
-      to_return(:status => 200, :body => "", :headers => {})
-    request.put('http://domain.test/update_page', :username => 'aaa', :password => 'zzz')
+    it "keeps slashes within strings" do
+      expect(request.join('http://', 'domain', '/path/to/something')).
+        to eq('http://domain/path/to/something')
+    end
   end
 end

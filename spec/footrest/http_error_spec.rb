@@ -2,7 +2,7 @@ require 'helper'
 
 describe Footrest::HttpError do
   before do
-    @client = Footrest::Client.new(domain: "http://domain.com", token: "test_token")
+    @client = Footrest::Client.new(prefix: "http://domain.com", token: "test_token")
   end
 
   it "raises a bad request error" do
