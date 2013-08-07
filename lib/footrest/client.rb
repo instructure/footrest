@@ -1,5 +1,6 @@
 require 'footrest/connection'
 require 'footrest/request'
+require 'footrest/configuration'
 
 module Footrest
   class Client

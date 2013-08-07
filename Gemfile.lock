@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    footrest (0.1.2)
+    footrest (0.1.3)
       activesupport (>= 3.0.0)
       faraday (~> 0.8.8)
       faraday_middleware (~> 0.9.0)
