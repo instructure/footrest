@@ -1,4 +1,5 @@
 require 'faraday'
+require 'footrest/http_error'
 
 module Faraday
   class Response::RaiseFootrestHttpError < Response::Middleware
