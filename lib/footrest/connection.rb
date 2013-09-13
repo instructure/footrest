@@ -7,7 +7,7 @@ module Footrest
 
     attr_reader :connection
 
-    def set_connection(config, &block)
+    def set_connection(config)
       @connection = Faraday.new(url: config[:prefix]) do |faraday|
         faraday.request                     :multipart
         faraday.request                     :url_encoded
@@ -19,7 +19,6 @@ module Footrest
         faraday.headers[:accept]          = "application/json"
         faraday.headers[:authorization]   = "Bearer #{config[:token]}" if config[:token]
         faraday.headers[:user_agent]      = "Footrest"
-        yield faraday if block_given?
       end
     end
 

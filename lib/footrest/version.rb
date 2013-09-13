@@ -1,3 +1,3 @@
 module Footrest
-  VERSION = '0.1.3' unless defined?(Footrest::VERSION)
+  VERSION = '0.2.0' unless defined?(Footrest::VERSION)
 end

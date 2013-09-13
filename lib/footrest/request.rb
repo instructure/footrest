@@ -1,18 +1,8 @@
 module Footrest
   module Request
 
-    def config
-      raise "Config should be overridden"
-    end
-
-    def join(*parts)
-      joined = parts.map{ |p| p.gsub(%r{^/|/$}, '') }.join('/')
-      joined = '/' + joined if parts.first[0] == '/'
-      joined
-    end
-
     def fullpath(path)
-      config[:prefix] ? join(config[:prefix], path) : path
+      raise "fullpath should be overridden"
     end
 
     def delete(path, options={})

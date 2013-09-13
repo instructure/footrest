@@ -3,12 +3,33 @@ require 'helper'
 describe Footrest::Client do
   it "sets the domain" do
     client = Footrest::Client.new(prefix: "http://domain.test")
-    expect(client.config.prefix).to eq("http://domain.test")
+    expect(client.prefix).to eq("http://domain.test")
   end
 
   it "sets the authtoken" do
     client = Footrest::Client.new(token: "test_token")
-    expect(client.config.token).to eq("test_token")
+    expect(client.token).to eq("test_token")
+  end
+
+  context "join" do
+    let(:client) { Footrest::Client.new }
+
+    it "retains initial slash" do
+      expect(client.send(:join, '/test', 'path')).to eq('/test/path')
+    end
+
+    it "combines multiple segments" do
+      expect(client.send(:join, 'test', 'path', 'parts')).to eq('test/path/parts')
+    end
+
+    it "respects http://" do
+      expect(client.send(:join, 'http://', 'path')).to eq('http://path')
+    end
+
+    it "keeps slashes within strings" do
+      expect(client.send(:join, 'http://', 'domain', '/path/to/something')).
+        to eq('http://domain/path/to/something')
+    end
   end
 
   context "Request" do
