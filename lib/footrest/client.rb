@@ -25,6 +25,7 @@ module Footrest
     end
 
     def fullpath(path)
+      return path if path =~ /^https?:/i
       prefix ? join(prefix, path) : path
     end
 

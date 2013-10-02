@@ -29,4 +29,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "faraday", "~> 0.8.8"
   gem.add_dependency "faraday_middleware", "~> 0.9.0"
   gem.add_dependency "activesupport", ">= 3.0.0"
+
+  # Parses Link headers formatted according to RFC 5988 draft spec
+  gem.add_dependency "link_header", ">= 0.0.7"
 end
