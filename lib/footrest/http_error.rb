@@ -1,3 +1,5 @@
+require 'json'
+
 module Footrest
   module HttpError
     class ErrorBase < StandardError
@@ -10,7 +12,13 @@ module Footrest
         @body = @response[:body]
         @method = @response[:method]
 
-        super("HTTP ERROR: #{@status}")
+        super("HTTP ERROR: #{@status} #{errors}")
+      end
+
+      def errors
+        JSON::pretty_generate(JSON::parse(@body)["errors"])
+      rescue
+        @body
       end
     end
 
