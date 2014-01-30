@@ -1,7 +1,8 @@
 require 'faraday'
-require 'faraday_middleware'
 require 'footrest/http_error'
 require 'footrest/pagination'
+require 'footrest/follow_redirects'
+require 'footrest/parse_json'
 
 module Footrest
   module Connection
@@ -14,8 +15,8 @@ module Footrest
         faraday.request                     :url_encoded
         faraday.response                    :logger if config[:logging]
         faraday.adapter                     Faraday.default_adapter
-        faraday.use                         FaradayMiddleware::FollowRedirects
-        faraday.use                         FaradayMiddleware::ParseJson, :content_type => /\bjson$/
+        faraday.use                         Footrest::FollowRedirects
+        faraday.use                         Footrest::ParseJson, :content_type => /\bjson$/
         faraday.use                         Footrest::RaiseFootrestErrors
         faraday.use                         Footrest::Pagination
         faraday.headers[:accept]          = "application/json"
