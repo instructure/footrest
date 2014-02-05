@@ -35,7 +35,6 @@ module Footrest
     end
 
     def process_response(env)
-      env[:raw_body] = env[:body] if preserve_raw?(env)
       env[:body] = parse(env[:body])
     end
 
@@ -69,10 +68,6 @@ module Footrest
 
     def parse_response?(env)
       env[:body].respond_to? :to_str
-    end
-
-    def preserve_raw?(env)
-      env[:request].fetch(:preserve_raw, @options[:preserve_raw])
     end
   end
 end
