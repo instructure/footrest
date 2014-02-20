@@ -10,10 +10,15 @@ module Footrest
     attr_reader :connection
 
     def set_connection(config)
+      config[:logger] = config[:logging] if config[:logging]
       @connection = Faraday.new(url: config[:prefix]) do |faraday|
         faraday.request                     :multipart
         faraday.request                     :url_encoded
-        faraday.response                    :logger if config[:logging]
+        if config[:logger] == true
+          faraday.response :logger
+        elsif config[:logger]
+          faraday.use Faraday::Response::Logger, config[:logger]
+        end
         faraday.adapter                     Faraday.default_adapter
         faraday.use                         Footrest::FollowRedirects
         faraday.use                         Footrest::ParseJson, :content_type => /\bjson$/

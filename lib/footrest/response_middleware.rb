@@ -55,9 +55,14 @@ module Footrest
     end
 
     def response_type(env)
-      type = env[:response_headers][CONTENT_TYPE].to_s
-      type = type.split(';', 2).first if type.index(';')
-      type
+      if env[:response_headers]
+        type = env[:response_headers][CONTENT_TYPE].to_s
+        type = type.split(';', 2).first if type.index(';')
+        type
+      else
+        warn("response_headers are nil. Did you use http when you meant https?")
+        nil
+      end
     end
 
     def process_response_type?(type)

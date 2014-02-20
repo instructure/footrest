@@ -1,4 +1,4 @@
-require 'helper'
+require_relative '../spec_helper'
 
 describe Footrest::HttpError do
   before do

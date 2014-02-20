@@ -1,4 +1,4 @@
-require 'helper'
+require_relative '../spec_helper'
 
 class RequestHarness; include Footrest::Request; end
 

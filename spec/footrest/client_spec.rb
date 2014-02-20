@@ -1,4 +1,4 @@
-require 'helper'
+require_relative '../spec_helper'
 
 describe Footrest::Client do
   it "sets the domain" do
