@@ -13,7 +13,28 @@ module Footrest
         @body = @response[:body]
         @method = @response[:method]
 
-        super("HTTP ERROR: #{@status} #{errors}")
+        super("HTTP ERROR: #{@status} #{method} #{url}\n#{errors}\n#{headers}")
+      end
+
+      def method
+        @method.to_s.upcase
+      rescue => e
+        "[Unable to show HTTP method: #{e}]"
+      end
+
+      def url
+        @response.url.to_s
+      rescue => e
+        "[Unable to show URL: #{e}]"
+      end
+
+      def headers
+        JSON::pretty_generate(
+          request: @response.request_headers,
+          response: @response.response_headers
+        )
+      rescue => e
+        "[Unable to show headers: #{e}]"
       end
 
       def errors
