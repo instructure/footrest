@@ -5,8 +5,9 @@ module Footrest
     def on_complete(response)
       if response[:response_headers]
         if link = response[:response_headers][:link]
-          response[:next_page] = find_link(link, "next")
-          response[:first_page] = find_link(link, "first")
+          %w(prev next first last current).each do |page|
+            response["#{page}_page".to_sym] = find_link(link, page)
+          end
         end
       end
     end
