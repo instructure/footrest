@@ -1,8 +1,7 @@
-
-require 'footrest'
 require 'rspec'
 require 'webmock/rspec'
-require 'json'
+
+require 'footrest'
 
 WebMock.disable_net_connect!
 
