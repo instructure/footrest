@@ -21,9 +21,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "bundler", ">= 1.0.0"
-  gem.add_development_dependency "rspec", "~> 2.6"
+  gem.add_development_dependency "rspec", "~> 3.3"
   gem.add_development_dependency "webmock"
   gem.add_development_dependency "pry"
+  gem.add_development_dependency "byebug"
 
   gem.add_dependency "faraday", "~> 0.9.0"
   gem.add_dependency "activesupport", ">= 3.0.0"
