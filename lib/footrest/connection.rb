@@ -19,7 +19,6 @@ module Footrest
         elsif config[:logger]
           faraday.use Faraday::Response::Logger, config[:logger]
         end
-        faraday.adapter                     Faraday.default_adapter
         faraday.use                         Footrest::FollowRedirects
         faraday.use                         Footrest::ParseJson, :content_type => /\bjson$/
         faraday.use                         Footrest::RaiseFootrestErrors
@@ -27,6 +26,7 @@ module Footrest
         faraday.headers[:accept]          = "application/json"
         faraday.headers[:authorization]   = "Bearer #{config[:token]}" if config[:token]
         faraday.headers[:user_agent]      = "Footrest"
+        faraday.adapter                     Faraday.default_adapter
       end
     end
 

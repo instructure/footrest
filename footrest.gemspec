@@ -20,13 +20,13 @@ Gem::Specification.new do |gem|
   gem.version       = Footrest::VERSION
 
   gem.add_development_dependency "rake"
-  gem.add_development_dependency "bundler", ">= 1.0.0"
+  gem.add_development_dependency "bundler"
   gem.add_development_dependency "rspec", "~> 3.3"
   gem.add_development_dependency "webmock"
   gem.add_development_dependency "pry"
   gem.add_development_dependency "byebug"
 
-  gem.add_dependency "faraday", "~> 0.9.0"
+  gem.add_dependency "faraday", ">= 0.9.0", "< 1"
   gem.add_dependency "activesupport", ">= 3.0.0"
 
   # Parses Link headers formatted according to RFC 5988 draft spec
