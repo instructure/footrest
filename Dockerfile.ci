@@ -1,0 +1,11 @@
+FROM instructure/ruby:2.4
+
+WORKDIR /usr/src/app
+
+COPY --chown=docker:docker footrest.gemspec Gemfile* /usr/src/app/
+COPY --chown=docker:docker lib/footrest/version.rb /usr/src/app/lib/footrest/version.rb
+RUN /bin/bash -l -c "bundle install"
+
+COPY --chown=docker:docker . /usr/src/app
+
+CMD /bin/bash -l -c "bundle exec rspec"
