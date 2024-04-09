@@ -34,7 +34,8 @@ module Footrest
       end
 
       def errors
-        JSON::pretty_generate(JSON::parse(@body)["errors"])
+        parsed_body = JSON::parse(@body)
+        JSON::pretty_generate(parsed_body["errors"] || parsed_body)
       rescue
         @body
       end
