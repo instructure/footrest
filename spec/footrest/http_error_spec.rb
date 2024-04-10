@@ -9,7 +9,7 @@ module Footrest
     describe HttpError::ErrorBase, :focus do
       let(:response) { Faraday::Env.new(
         :get,
-        {errors: [{message: "I don't even"}]}.to_json,
+        { }.to_json,
         URI.parse('http://domain.com/api/v1/not_found'),
         Faraday::RequestOptions.new,
         {
@@ -22,7 +22,8 @@ module Footrest
         nil,
         nil,
         {"Foo-Bar" => 'baz'},
-        400
+        400,
+        "Bad Response", { errors: [{message: "I don't even"}] }.to_json
       ) }
       let(:error) { HttpError::ErrorBase.new(response) }
 

@@ -47,7 +47,7 @@ module Footrest
           self.class.parser.call(body)
         rescue StandardError, SyntaxError => err
           raise err if err.is_a? SyntaxError and err.class.name != 'Psych::SyntaxError'
-          raise Faraday::Error::ParsingError, err
+          raise Faraday::ParsingError, err
         end
       else
         body
