@@ -21,6 +21,10 @@ module Footrest
       request_with_params_in_body(:put, path, options)
     end
 
+    def patch(path, options={})
+      request_with_params_in_body(:patch, path, options)
+    end
+
     def request_with_params_in_url(method, path, options)
       request(method) do |r|
         r.url(fullpath(path), options)
