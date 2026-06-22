@@ -70,7 +70,7 @@ module Footrest
     end
   end
 
-  class RaiseFootrestErrors < Faraday::Response::Middleware
+  class RaiseFootrestErrors < Faraday::Middleware
     ERROR_MAP = {
       400 => Footrest::HttpError::BadRequest,
       401 => Footrest::HttpError::Unauthorized,

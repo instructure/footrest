@@ -25,9 +25,11 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "webmock"
   gem.add_development_dependency "pry"
   gem.add_development_dependency "byebug"
-  gem.add_development_dependency "faraday", ">1.0.0", "< 2"
+  gem.add_development_dependency "appraisal", "~> 2.5"
+  gem.add_development_dependency "faraday", ">= 1.0", "< 3"
 
-  gem.add_dependency "faraday", ">= 0.9.0", "< 2"
+  gem.add_dependency "faraday", ">= 1.0", "< 3"
+  gem.add_dependency "faraday-multipart", "~> 1.0"
   gem.add_dependency "activesupport", ">= 3.0.0"
 
   # Parses Link headers formatted according to RFC 5988 draft spec

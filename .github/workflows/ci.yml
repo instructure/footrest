@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    name: rspec (ruby ${{ matrix.ruby }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["2.7", "3.0", "3.2", "3.3"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      # Generate the per-Faraday gemfiles from Appraisals (not committed),
+      # install each, then run the suite across all of them.
+      - name: Install appraisal gemfiles
+        run: bundle exec appraisal install
+
+      - name: Run specs across Faraday versions
+        run: bundle exec appraisal rspec

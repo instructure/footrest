@@ -1,12 +1,10 @@
 require 'footrest/response_middleware'
 
+require 'json'
+
 module Footrest
   # Public: Parse response bodies as JSON.
   class ParseJson < ResponseMiddleware
-    dependency do
-      require 'json' unless defined?(::JSON)
-    end
-
     define_parser do |body|
       ::JSON.parse body unless body.strip.empty?
     end

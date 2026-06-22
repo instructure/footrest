@@ -1,7 +1,10 @@
+require 'faraday'
 require 'link_header'
 
 module Footrest
-  class Pagination < Faraday::Response::Middleware
+  # Faraday 2.x removed Faraday::Response::Middleware; the on_complete hook now
+  # lives on the unified Faraday::Middleware base (also present in 1.x).
+  class Pagination < Faraday::Middleware
     Links = Struct.new(:first, :prev, :current, :next, :last) do
       alias_method :previous, :prev
       alias_method :prevous=, :prev=
