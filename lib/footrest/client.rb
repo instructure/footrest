@@ -11,7 +11,10 @@ module Footrest
     # Any other option remains reachable through #config (e.g. config[:domain]).
     CONFIG_ACCESSORS = %i[token prefix logging].freeze
 
+    class_attribute :config, default: ActiveSupport::OrderedOptions.new
+
     def initialize(options={}, &block)
+      @config = self.class.config.deep_dup
       config.merge!(options)
       yield self if block_given?
       set_connection(config)
@@ -27,6 +30,11 @@ module Footrest
     end
 
     CONFIG_ACCESSORS.each do |name|
+      # class accessor methods
+      define_singleton_method(name) { config[name] }
+      define_singleton_method("#{name}=") { |value| config[name] = value }
+
+      # instance accessor methods
       define_method(name) { config[name] }
       define_method("#{name}=") { |value| config[name] = value }
     end
